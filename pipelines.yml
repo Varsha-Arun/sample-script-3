@@ -6,6 +6,8 @@ resources:
       path: Varsha-Arun/sample-script-3
     branches:
       include: king
+    files:
+      include: echo.sh
       
 pipelines:
   - name: multiBranchPipelines
