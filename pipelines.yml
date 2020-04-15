@@ -4,8 +4,8 @@ resources:
     configuration:
       gitProvider: varsha_github
       path: Varsha-Arun/sample-script-3
-    branches:
-      include: king
+      branches:
+        include: king
       
 pipelines:
   - name: multiBranchPipelines
