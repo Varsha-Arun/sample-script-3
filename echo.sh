@@ -1,2 +1,1 @@
-echo ' ---> Hello runShnew9'
-#sleep 5m
+echo ' --->gitRepo for 300 resources'
