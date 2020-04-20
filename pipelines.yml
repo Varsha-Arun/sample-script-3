@@ -1,13 +1,13 @@
 resources:
-  - name: multiBr_ghRepo
-    type: GitRepo
-    configuration:
-      gitProvider: varsha_github
-      path: Varsha-Arun/sample-script
-      branches:
-        include: master
-      files:
-        include: echo.sh
+#   - name: multiBr_ghRepo
+#     type: GitRepo
+#     configuration:
+#       gitProvider: varsha_github
+#       path: Varsha-Arun/sample-script
+#       branches:
+#         include: master
+#       files:
+#         include: echo.sh
 
   - name: multiBr_ghRepo2
     type: GitRepo
@@ -20,25 +20,25 @@ resources:
 pipelines:
   - name: multiBranchPipelines
     steps:
-      - name: multiBr_bash
-        type: Bash
-        configuration:
-          inputResources: 
-            - name: multiBr_ghRepo
-        execution:
-          onExecute:
-            - printenv
-            - cd $res_multiBr_ghRepo_resourcePath
-            - ls
-            - ./echo.sh
+#       - name: multiBr_bash
+#         type: Bash
+#         configuration:
+#           inputResources: 
+#             - name: multiBr_ghRepo
+#         execution:
+#           onExecute:
+#             - printenv
+#             - cd $res_multiBr_ghRepo_resourcePath
+#             - ls
+#             - ./echo.sh
 
       - name: multiBr_bash2
         type: Bash
         configuration:
           inputResources:
             - name: multiBr_ghRepo2
-          inputSteps:
-            - name: multiBr_bash
+#           inputSteps:
+#             - name: multiBr_bash
         execution:
           onExecute:
             - printenv
