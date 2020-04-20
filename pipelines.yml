@@ -37,8 +37,8 @@ pipelines:
         configuration:
           inputResources:
             - name: multiBr_ghRepo2
-#           inputSteps:
-#             - name: multiBr_bash
+          inputSteps:
+            - name: multiBr_bash
         execution:
           onExecute:
             - printenv
