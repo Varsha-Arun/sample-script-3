@@ -1,47 +1,141 @@
 resources:
-  - name: multiBr_ghRepo
-    type: GitRepo
+  - name: allRes_Aql
+    type: Aql
     configuration:
-      gitProvider: varsha_github
-      path: Varsha-Arun/sample-script
-      branches:
-        include: master
-      files:
-        include: echo.sh
-
-  - name: multiBr_ghRepo2
-    type: GitRepo
+      sourceArtifactory: varsha-Art
+      query: items.find({"@build.name":{"$eq":"artifactory"}})
+      addedProperties:
+        key1: value1
+        key2: value2
+      mappings:
+        - name: mapping1
+          input: IN
+          output: test1
+        - name: mapping2
+          input: IN
+          output: test2
+          
+  - name: allRes_BuildInfo
+    type: BuildInfo
     configuration:
-      gitProvider: varsha_github
-      path: Varsha-Arun/pipelines
-      branches:
-        include: test
+      sourceArtifactory: varsha_art
+      buildName: mvn_sample_build_auto
+      buildNumber: 1
 
+  - name: allRes_CronTrigger
+     type: CronTrigger
+     configuration:
+       interval: <string> # should be a cron expression
+       
+  - name: allRes_DistributionRule
+    type: DistributionRule
+    configuration:
+      sourceDistribution: varsha_dist
+      serviceName: svce
+      siteName: "*"
+      cityName: "*"
+      countryCodes:
+        - IN
+        - US
+        - UK 
+  
+  - name: allRes_FileSpec
+    type: FileSpec
+    configuration:
+      sourceArtifactory: vasrha_dist
+      pattern: "artifactory-build*"
+  
+  - name: allRes_HelmChart
+    type: HelmChart
+    configuration:
+      sourceArtifactory: varsha_art
+      repository: helm-remote
+      chart: consul
+      version: 1.0.0
+  
+  - name: allRes_image
+    type: Image
+    configuration:
+       registry: varsha_docker
+       imageName: shippabledocker/sample_node
+       imageTag: latest
+       autoPull: true
+  
+  - name: allRes_IncomingWebhook
+    type: IncomingWebhook
+    configuration:
+      webhookName: varsha_incomingWebhook
+  
+  - name: allRes_OutgoingWebhook
+    type: OutgoingWebhook
+    configuration:
+      webhookName: varsha_outgoingWebhook
+      method: GET #default POST
+      #Parameters: <query string to be added>
+     # path: “/api/v1/issues”
+      #headers:
+       # accept: xyc
+  
+  - name: allRes_releaseBundle
+    type: ReleaseBundle
+    configuration:
+      sourceDistribution: varsha_dist
+      name: myRel
+      version: v1.0
+      isSigned: false 
+  
+  - name: allRes_RemoteFile
+    type: RemoteFile
+    configuration:
+      source: i_gcpkey
+      fileLocation: gs://pipelines_bucker_01 
+  
+  - name: allRes_VmCluster
+    type: VmCluster
+    configuration:
+      sshKey: sshkeys
+      targets:
+        - 1.2.3.6
+        
 pipelines:
-  - name: multiBranchPipelines
+  - name: pipelines_allRes_in_out
     steps:
-      - name: multiBr_bash
+      - name: Bash_1
         type: Bash
         configuration:
-          inputResources: 
-            - name: multiBr_ghRepo
+          outputResources:
+            - name: allRes_Aql
+            - name: allRes_BuildInfo
+            - name: allRes_CronTrigger
+            - name: allRes_DistributionRule
+            - name: allRes_FileSpec
+            - name: allRes_HelmChart
+            - name: allRes_image
+            - name: allRes_IncomingWebhook
+            - name: allRes_OutgoingWebhook
+            - name: allRes_releaseBundle
+            - name: allRes_RemoteFile
+            - name: allRes_VmCluster
         execution:
           onExecute:
-            - printenv
-            - cd $res_multiBr_ghRepo_resourcePath
-            - ls
-            - ./echo.sh
+            - echo "executing step..."
+           # - write_output r_Aql "query=items.find({"repo": "mvn_test_repo"})"
 
-      - name: multiBr_bash2
+      - name: Bash_2
         type: Bash
         configuration:
           inputResources:
-            - name: multiBr_ghRepo2
-          inputSteps:
-            - name: multiBr_bash
+            - name: allRes_Aql
+            - name: allRes_BuildInfo
+            - name: allRes_CronTrigger
+            - name: allRes_DistributionRule
+            - name: allRes_FileSpec
+            - name: allRes_HelmChart
+            - name: allRes_image
+            - name: allRes_IncomingWebhook
+            - name: allRes_releaseBundle
+            - name: allRes_RemoteFile
+            - name: allRes_VmCluster
         execution:
           onExecute:
-            - printenv
-            - cd $res_multiBr_ghRepo2_resourcePath
-            - ls
-            - ./auto.sh
+            - echo "executing step..."
