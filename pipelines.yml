@@ -2,7 +2,7 @@ resources:
   - name: allRes_Aql
     type: Aql
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: art
       query: items.find({"@build.name":{"$eq":"artifactory"}})
       addedProperties:
         key1: value1
@@ -18,7 +18,7 @@ resources:
   - name: allRes_BuildInfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: art
       buildName: mvn_sample_build_auto
       buildNumber: 1
 
@@ -30,7 +30,7 @@ resources:
   - name: allRes_DistributionRule
     type: DistributionRule
     configuration:
-      sourceDistribution: varsha_dist
+      sourceDistribution: dist_demo
       serviceName: svce
       siteName: "*"
       cityName: "*"
@@ -42,13 +42,13 @@ resources:
   - name: allRes_FileSpec
     type: FileSpec
     configuration:
-      sourceArtifactory: varsha_dist
+      sourceArtifactory: art
       pattern: "artifactory-build*"
   
   - name: allRes_HelmChart
     type: HelmChart
     configuration:
-      sourceArtifactory: varsha_artifactory
+      sourceArtifactory: art
       repository: helm-remote
       chart: consul
       version: 1.0.0
@@ -79,7 +79,7 @@ resources:
   - name: allRes_releaseBundle
     type: ReleaseBundle
     configuration:
-      sourceDistribution: varsha_dist
+      sourceDistribution: dist_demo
       name: myRel
       version: v1.0
       isSigned: false 
@@ -87,7 +87,7 @@ resources:
   - name: allRes_RemoteFile
     type: RemoteFile
     configuration:
-      source: varsha_artifactory
+      source: art
       fileLocation: gs://pipelines_bucker_01 
   
   - name: allRes_VmCluster
