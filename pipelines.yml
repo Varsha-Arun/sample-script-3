@@ -23,9 +23,9 @@ resources:
       buildNumber: 1
 
   - name: allRes_CronTrigger
-     type: CronTrigger
-     configuration:
-       interval: <string> # should be a cron expression
+    type: CronTrigger
+    configuration:
+      interval: 0 0 12 * * MON # should be a cron expression
        
   - name: allRes_DistributionRule
     type: DistributionRule
