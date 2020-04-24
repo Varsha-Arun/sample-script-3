@@ -2,7 +2,7 @@ resources:
   - name: allRes_Aql
     type: Aql
     configuration:
-      sourceArtifactory: varsha-Art
+      sourceArtifactory: varsha_art
       query: items.find({"@build.name":{"$eq":"artifactory"}})
       addedProperties:
         key1: value1
@@ -87,13 +87,13 @@ resources:
   - name: allRes_RemoteFile
     type: RemoteFile
     configuration:
-      source: i_gcpkey
+      source: varsha_art
       fileLocation: gs://pipelines_bucker_01 
   
   - name: allRes_VmCluster
     type: VmCluster
     configuration:
-      sshKey: sshkeys
+      sshKey: varsha_sshkeys
       targets:
         - 1.2.3.6
         
